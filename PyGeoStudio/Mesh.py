@@ -58,8 +58,14 @@ class Mesh:
     :return: Index of the point in the mesh (0 based)
     :rtype: int
     """
-    X,Y = location
-    Z = 0.
+
+    if len(location) == 2:
+      X,Y = location
+      Z = 0.
+    elif len(location) ==3:
+      X,Y,Z = location
+    else:
+      raise ValueError("Location should be 2D or 3D coordinates")
     vertices = self.vertices
     domain_diag = (np.min(vertices['x'])-np.max(vertices['x']))**2 + \
                    (np.min(vertices['y'])-np.max(vertices['y']))**2 + \
